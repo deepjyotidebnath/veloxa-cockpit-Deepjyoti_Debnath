@@ -1,0 +1,29 @@
+row,txn_date,voucher,vendor,ref,cost_centre,amount_inr,narration,entered_by
+1,2026-04-08,JV-0421,Amazon Web Services,AWS-0426,ENG-INF,181200,"AWS, previous month",FS
+2,2026-04-28,PAY-APR,Salaries (payroll),PR-Apr26,PAYROLL,3175000,"Salaries, Apr",FS
+3,2026-04-30,RENT-APR,WeWork India,WW-0426,G&A,236000,"Office rent, Apr",FS
+4,2026-05-04,JV-0503,Google India Pvt Ltd,GADS-0426,MKT-PS,76700,Google Ads,FS
+5,2026-05-08,JV-0521,Amazon Web Services,AWS-0526,ENG-INF,190450,"AWS, previous month",FS
+6,2026-05-28,PAY-MAY,Salaries (payroll),PR-May26,PAYROLL,3175000,"Salaries, May",FS
+7,2026-05-31,RENT-MAY,WeWork India,WW-0526,G&A,236000,"Office rent, May",FS
+8,2026-06-04,JV-0603,Google India Pvt Ltd,GADS-0526,MKT-PS,81420,Google Ads,FS
+9,2026-06-08,JV-0621,Amazon Web Services,AWS-0626,ENG-INF,205900,"AWS, previous month",FS
+10,2026-06-28,PAY-JUN,Salaries (payroll),PR-Jun26,PAYROLL,3175000,"Salaries, Jun",FS
+11,2026-06-30,RENT-JUN,WeWork India,WW-0626,G&A,236000,"Office rent, Jun",FS
+12,2026-06-30,JV-0688,Cohere Recruiting Partners,CRP-0412,PPL-HIR,177000,"Search fee, 2 backend roles (50% advance)",FS
+13,2026-07-04,JV-0703,Google India Pvt Ltd,GADS-0626,MKT-PS,94400,Google Ads,FS
+14,2026-07-08,JV-0721,Amazon Web Services,AWS-0726,ENG-INF,212480,"AWS, previous month",FS
+15,2026-07-28,PAY-JUL,Salaries (payroll),PR-Jul26,PAYROLL,3175000,"Salaries, Jul",FS
+16,2026-07-31,RENT-JUL,WeWork India,WW-0726,G&A,236000,"Office rent, Jul",FS
+17,2026-08-04,JV-0803,Google India Pvt Ltd,GADS-0726,MKT-PS,88500,Google Ads,FS
+18,2026-08-08,JV-0821,Amazon Web Services,AWS-0826,ENG-INF,219830,"AWS, previous month",FS
+19,2026-08-28,PAY-AUG,Salaries (payroll),PR-Aug26,PAYROLL,3175000,"Salaries, Aug",FS
+20,2026-08-29,JV-0846,Sapphire Events Pvt Ltd,INV-2291,MKT-EVT,542800,"Summit: venue, AV",FS
+21,2026-08-31,RENT-AUG,WeWork India,WW-0826,G&A,236000,"Office rent, Aug",FS
+22,2026-09-02,JV-0902,Patil Infra Services,PIS-108,ENG-OPS,70800,"On-call support, 18-31 Aug",FS
+23,2026-09-03,JV-0904,Saphire Event Mgmt,SEM-0087,MKT-EVT,460200,Catering etc.,FS
+24,2026-09-04,JV-0903,Google India Pvt Ltd,GADS-0826,MKT-PS,82600,Google Ads,FS
+25,2026-09-08,JV-0921,Amazon Web Services,AWS-0926,ENG-INF,248310,"AWS, previous month",FS
+26,2026-09-11,JV-0918,Sapphire Residency Hotel,SRH/26/4471,SAL-TRV,38940,Sales offsite,FS
+27,2026-09-28,PAY-SEP,Salaries (payroll),PR-Sep26,PAYROLL,3175000,"Salaries, Sep",FS
+28,2026-09-30,RENT-SEP,WeWork India,WW-0926,G&A,236000,"Office rent, Sep",FS
