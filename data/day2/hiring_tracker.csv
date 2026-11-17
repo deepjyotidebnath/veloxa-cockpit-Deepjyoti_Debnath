@@ -1,0 +1,7 @@
+req_id,role,team,hiring_manager,opened,status,status_date,in_pipeline,notes
+REQ-011,Account Executive,Sales,VX002,2026-01-10,Closed - not hired,2026-04-02,0,Budget moved to marketing
+REQ-013,Backend Engineer,Engineering,VX004,2025-12-01,Filled,2026-01-12,0,"Offer accepted, joining 3-Feb"
+REQ-014,Backend Engineer (Routing),Engineering,VX004,2026-05-18,On hold,2026-08-12,3,Final round 14-Aug cancelled
+REQ-015,Backend Engineer (Platform),Engineering,VX004,2026-05-18,On hold,2026-08-12,5,
+REQ-016,Product Marketing Manager,Marketing,VX006,2026-09-17,Open,2026-09-17,7,Backfill
+REQ-017,Support Associate,Support,VX016,2026-10-01,Open,2026-10-01,2,

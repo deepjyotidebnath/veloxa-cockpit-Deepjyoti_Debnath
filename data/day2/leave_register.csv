@@ -1,0 +1,20 @@
+leave_id,employee_as_written,emp_id,leave_type,from_date,to_date,days,approved_by
+L01,A. Das,VX009,Casual,2025-11-14,2025-11-14,1,VM
+L02,P. Nair,VX007,Casual,2025-12-24,2025-12-24,1,VM
+L03,K. Subramanian,VX010,Casual,2026-01-16,2026-01-16,1,MI
+L04,F. Sheikh,VX014,Marriage,2026-02-09,2026-02-27,15,MI
+L05,A. Das,VX009,Relocation,2026-03-02,2026-03-06,5,VM
+L06,S. Kulkarni,VX012,Sick,2026-04-21,2026-04-22,2,VM
+L07,K. Subramanian,VX010,Exam,2026-05-25,2026-05-29,5,MI
+L08,N. Bose,VX006,Casual,2026-06-12,2026-06-12,1,AR
+L09,A. Khan,VX011,Earned,2026-06-15,2026-06-19,5,NB
+L10,R. Verma,VX018,Casual,2026-07-10,2026-07-10,1,VM
+L11,S. Mehta,VX013,Earned,2026-08-03,2026-08-07,5,NB
+L12,D. Joshi,VX005,Earned,2026-08-17,2026-08-21,5,AR
+L13,P. Nair,VX007,"Personal (half day, PM)",2026-09-03,2026-09-03,0.5,VM
+L14,P. Nair,VX007,"Personal (half day, PM)",2026-09-08,2026-09-08,0.5,VM
+L15,P. Nair,VX007,"Personal (half day, PM)",2026-09-15,2026-09-15,0.5,VM
+L16,P. Nair,VX007,"Personal (half day, PM)",2026-09-17,2026-09-17,0.5,VM
+L17,P. Nair,VX007,"Personal (half day, PM)",2026-09-24,2026-09-24,0.5,VM
+L18,L. Pillai,VX017,Casual,2026-10-09,2026-10-09,1,DJ
+L19,V. Menon,VX004,Earned,2026-10-12,2026-10-16,5,AR
