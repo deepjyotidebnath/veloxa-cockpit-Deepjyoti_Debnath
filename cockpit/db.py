@@ -20,7 +20,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 DB_PATH = ROOT / "build" / "veloxa.db"
 
-RELEASES = {"day1": "2026-11-16", "day2": "2026-11-17"}  # Day 3/4 added when released
+RELEASES = {"day1": "2026-11-16", "day2": "2026-11-17", "day3": "2026-11-18", "day4": "2026-11-19"}
 
 SCHEMA = """
 CREATE TABLE sources(source_id TEXT PRIMARY KEY, kind TEXT, title TEXT, path TEXT,
@@ -45,6 +45,23 @@ CREATE TABLE documents(doc_id TEXT PRIMARY KEY, kind TEXT, effective_date TEXT, 
   body TEXT, source_id TEXT);
 CREATE TABLE transcripts(t_id TEXT PRIMARY KEY, effective_date TEXT, speakers TEXT, body TEXT,
   source_id TEXT);
+CREATE TABLE jira_issues(key TEXT PRIMARY KEY, type TEXT, summary TEXT, epic TEXT, epic_name TEXT,
+  assignee_initials TEXT, emp_id TEXT, story_points INT, status TEXT, created TEXT, resolved TEXT,
+  fix_version TEXT, source_id TEXT);
+CREATE TABLE jira_versions(version TEXT PRIMARY KEY, release_date TEXT, original_release_date TEXT,
+  last_changed TEXT, changed_by TEXT, source_id TEXT);
+CREATE TABLE incidents(id TEXT PRIMARY KEY, severity TEXT, opened_utc TEXT, resolved_utc TEXT,
+  effective_date TEXT, service TEXT, responder_as_written TEXT, responder_emp_id TEXT,
+  responder_kind TEXT, duration_min INT, source_id TEXT);
+CREATE TABLE oncall(week_of TEXT PRIMARY KEY, primary_as_written TEXT, secondary_as_written TEXT,
+  primary_emp_id TEXT, secondary_emp_id TEXT, primary_kind TEXT, secondary_kind TEXT, source_id TEXT);
+CREATE TABLE commits(sha TEXT PRIMARY KEY, author_email TEXT, emp_id TEXT, committed_at TEXT,
+  effective_date TEXT, ist_hour INT, repo TEXT, message TEXT, files_changed INT, source_id TEXT);
+CREATE TABLE invoices(inv_no TEXT PRIMARY KEY, vendor TEXT, invoice_date TEXT, period TEXT,
+  net_inr INT, gst_inr INT, total_inr INT, source_id TEXT);
+-- Reporting lines over time. 'recorded' rows come from the HR master; 'planned' rows are stated intentions
+-- (e.g. CEO voice note T6b) that are NOT facts until a dated record confirms them.
+CREATE TABLE org_history(emp_id TEXT, manager_id TEXT, from_date TEXT, to_date TEXT, status TEXT, source_id TEXT);
 """
 
 MONTHS = {m: i for i, m in enumerate(
@@ -78,6 +95,23 @@ def _quarter_effective(q):
 def _email_date(h):
     from email.utils import parsedate_to_datetime
     return parsedate_to_datetime(h).date().isoformat()
+
+
+# Entity resolution for the engineering exports (reasoning in TRANSCRIPT_NOTES.md N-25..N-28)
+JIRA_INITIALS = {"PN": "VX007", "RV": "VX018", "AD": "VX009", "SK": "VX012"}
+GIT_EMAILS = {"priya.n@veloxa.in": "VX007", "pnair@users.noreply.github.com": "VX007",
+              "arjun@veloxa.in": "VX009", "rahul.v@veloxa.in": "VX018", "sneha.k@veloxa.in": "VX012",
+              "vikram@veloxa.in": "VX004"}
+# "Sneha" = employee Sneha Kulkarni; "Snehal" = contractor S. Patil (Patil Infra Services); NOT the same person.
+RESPONDERS = {"Sneha": ("VX012", "employee"), "Snehal": (None, "contractor"),
+              "Arjun": ("VX009", "employee"), "Priya": ("VX007", "employee")}
+IST_OFFSET = 5.5 * 3600
+
+
+def _ist(ts):
+    import datetime as dt
+    d = dt.datetime.fromisoformat(ts.replace("Z", "+00:00")).astimezone(dt.timezone(dt.timedelta(hours=5, minutes=30)))
+    return d
 
 
 def build(db_path=DB_PATH):
@@ -180,6 +214,68 @@ def build(db_path=DB_PATH):
                    (r["leave_id"], r["emp_id"], r["leave_type"], r["from_date"], r["to_date"],
                     float(r["days"]), r["approved_by"], s))
 
+    # ---------------- Day 3 ----------------
+    d3 = DATA / "day3"
+    transcript("T4", "day3", "T4_head_of_marketing.md", "Nikhil B.; Speaker 2", "Fair audio; call date unknown, after 17 Sep 2026")
+    transcript("T5", "day3", "T5_vp_engineering.md", "Vikram M.; Ananya R.", "4-minute audio gap; call date unknown")
+    transcript("T6b", "day3", "T6b_ceo_voice_note.md", "Ananya R.", "Voice note; date unknown")
+    emails("day3", "Selected threads only; numbering has gaps")
+    for did, kind, eff, title, fn, sid, rel in [
+            ("launch_kit", "launch_kit", "2026-07-21", "Atlas launch kit v1", "atlas_launch_kit_v1.md",
+             "SRC-LAUNCH", "medium"),
+            ("invoice_pis114", "invoice", "2026-10-01", "Invoice PIS-114 (Patil Infra Services)",
+             "invoice_pis_114.md", "SRC-INV-PIS114", "high")]:
+        S(sid, "document", title, f"day3/documents/{fn}", "day3", eff, rel)
+        db.execute("INSERT INTO documents VALUES(?,?,?,?,?,?)",
+                   (did, kind, eff, title, (d3 / "documents" / fn).read_text(), sid))
+    db.execute("INSERT INTO invoices VALUES(?,?,?,?,?,?,?,?)",
+               ("PIS-114", "Patil Infra Services", "2026-10-01", "2026-09", 120000, 21600, 141600, "SRC-INV-PIS114"))
+    epics = {r["key"]: r["epic_name"] for r in _rows(d3 / "jira_epics.csv")}
+    s = S("SRC-JIRA", "export", "Jira export, project ATLAS (assignee as initials)", "day3/jira_issues.csv",
+          "day3", "2026-10-31", "high", "Issues, epics and versions sheets of one workbook. Initials mapped by us.")
+    for r in _rows(d3 / "jira_issues.csv"):
+        db.execute("INSERT INTO jira_issues VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                   (r["key"], r["type"], r["summary"], r["epic"], epics[r["epic"]], r["assignee_initials"],
+                    JIRA_INITIALS[r["assignee_initials"]], int(r["story_points"]), r["status"], r["created"],
+                    r["resolved"] or None, r["fix_version"], s))
+    for r in _rows(d3 / "jira_versions.csv"):
+        db.execute("INSERT INTO jira_versions VALUES(?,?,?,?,?,?)",
+                   (r["version"], r["release_date"], r["original_release_date"], r["last_changed"], r["changed_by"], s))
+    s = S("SRC-PD", "export", "PagerDuty incidents Aug-Oct 2026", "day3/incidents.csv", "day3", "2026-10-31",
+          "high", "Timestamps are UTC (Z); emails are IST. Responder is a first name only.")
+    for r in _rows(d3 / "incidents.csv"):
+        emp, kind = RESPONDERS[r["responder_as_written"]]
+        o, c = _ist(r["opened_utc"]), _ist(r["resolved_utc"])
+        db.execute("INSERT INTO incidents VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+                   (r["id"], r["severity"], r["opened_utc"], r["resolved_utc"], o.date().isoformat(), r["service"],
+                    r["responder_as_written"], emp, kind, int((c - o).total_seconds() // 60), s))
+    s = S("SRC-ROTA", "export", "On-call rota (team wiki table, copied)", "day3/oncall_rota.csv", "day3",
+          "2026-10-31", "medium", "Hand-copied wiki table; disagrees with email 08 on when the contractor started.")
+    for r in _rows(d3 / "oncall_rota.csv"):
+        (pe, pk), (se, sk) = (RESPONDERS[r["primary_as_written"]], RESPONDERS[r["secondary_as_written"]])
+        db.execute("INSERT INTO oncall VALUES(?,?,?,?,?,?,?,?)",
+                   (r["week_of"], r["primary_as_written"], r["secondary_as_written"], pe, se, pk, sk, s))
+    s = S("SRC-GIT", "export", "Git log (all four repos, Nov 2025-Oct 2026)", "day3/git_log.csv", "day3",
+          "2026-10-30", "high", "Priya appears under two author emails; both mapped to VX007 (N-26). Times are UTC.")
+    for r in _rows(d3 / "git_log.csv"):
+        t = _ist(r["committed_at"])
+        db.execute("INSERT INTO commits VALUES(?,?,?,?,?,?,?,?,?,?)",
+                   (r["sha"], r["author_email"], GIT_EMAILS[r["author_email"]], r["committed_at"],
+                    t.date().isoformat(), t.hour, r["repo"], r["message"], int(r["files_changed"]), s))
+
+    # ---------------- Day 4 ----------------
+    transcript("T6c", "day4", "T6c_ceo_voice_note.md", "Ananya R.", "Voice note; date unknown")
+    transcript("T6d", "day4", "T6d_ceo_voice_note.md", "Ananya R.", "Voice note; says 'this morning'; date unknown; "
+               "reports an event with no system record (the data room ends 31 Oct)")
+
+    # ---------------- Reporting lines ----------------
+    for e in db.execute("select emp_id, manager_id, join_date, exit_date from employees where manager_id is not null"):
+        db.execute("INSERT INTO org_history VALUES(?,?,?,?,?,?)",
+                   (e[0], e[1], e[2], e[3], "recorded", "SRC-EMP"))
+    # T6b: Marketing to report to a new CRO "from next month, or the month after". Nobody holds the role,
+    # no date is firm: stored as PLANNED, with no manager id and no start date, and never used as fact.
+    db.execute("INSERT INTO org_history VALUES(?,?,?,?,?,?)", ("VX006", "CRO-TBD", None, None, "planned", "SRC-T6b"))
+
     db.executemany("INSERT INTO sources VALUES(?,?,?,?,?,?,?,?)", src)
     db.commit()
     return db
@@ -202,5 +298,6 @@ def connect(db_path=DB_PATH):
 if __name__ == "__main__":
     d = build()
     for t in ("sources", "employees", "gl", "payroll", "reqs", "pulse", "leave", "emails",
-              "documents", "transcripts"):
+              "documents", "transcripts", "jira_issues", "jira_versions", "incidents", "oncall", "commits",
+              "invoices", "org_history"):
         print(f"{t:<10} {d.execute(f'select count(*) from {t}').fetchone()[0]}")
