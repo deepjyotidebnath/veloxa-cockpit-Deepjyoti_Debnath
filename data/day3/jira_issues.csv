@@ -1,0 +1,63 @@
+key,type,summary,epic,assignee_initials,story_points,status,created,resolved,fix_version
+ATLAS-11,Story,Capacity rules (pn-1),ATLAS-1,PN,3,Done,2026-05-06,2026-05-18,Atlas GA
+ATLAS-12,Story,Graph loader (pn-2),ATLAS-1,PN,2,Done,2026-06-10,2026-07-25,Atlas GA
+ATLAS-13,Story,Multi-stop merge (pn-3),ATLAS-1,PN,3,Done,2026-05-07,2026-06-01,Atlas GA
+ATLAS-14,Story,Turn restrictions (pn-4),ATLAS-1,PN,3,Done,2026-06-25,2026-07-11,Atlas GA
+ATLAS-15,Story,Graph loader (pn-5),ATLAS-1,PN,2,Done,2026-07-31,2026-09-01,Atlas GA
+ATLAS-16,Story,Cost model (pn-6),ATLAS-1,PN,3,To Do,2026-05-05,,Atlas GA
+ATLAS-17,Story,Multi-stop merge (pn-7),ATLAS-1,PN,3,Done,2026-06-17,2026-08-10,Atlas GA
+ATLAS-18,Story,Capacity rules (pn-8),ATLAS-1,PN,3,Done,2026-07-13,2026-08-12,Atlas GA
+ATLAS-19,Story,Depot constraints (pn-9),ATLAS-1,PN,8,In Progress,2026-05-22,,Atlas GA
+ATLAS-20,Story,Capacity rules (pn-10),ATLAS-1,PN,2,Done,2026-04-11,2026-04-26,Atlas GA
+ATLAS-21,Story,Capacity rules (pn-11),ATLAS-1,PN,3,In Progress,2026-06-25,,Atlas GA
+ATLAS-22,Story,Solver warm start (pn-12),ATLAS-1,PN,5,Done,2026-06-13,2026-07-08,Atlas GA
+ATLAS-23,Story,Capacity rules (pn-13),ATLAS-1,PN,5,Done,2026-05-22,2026-06-13,Atlas GA
+ATLAS-24,Story,Capacity rules (rv-1),ATLAS-1,RV,3,To Do,2026-06-28,,Atlas GA
+ATLAS-25,Story,Time windows (rv-2),ATLAS-1,RV,3,To Do,2026-04-20,,Atlas GA
+ATLAS-26,Story,Capacity rules (rv-3),ATLAS-1,RV,3,Done,2026-04-11,2026-04-21,Atlas GA
+ATLAS-27,Story,Diff push (pn-1),ATLAS-2,PN,2,To Do,2026-05-12,,Atlas GA
+ATLAS-28,Story,Re-route trigger (pn-2),ATLAS-2,PN,2,Done,2026-06-23,2026-07-18,Atlas GA
+ATLAS-29,Story,Re-route trigger (pn-3),ATLAS-2,PN,8,In Progress,2026-07-16,,Atlas GA
+ATLAS-30,Story,Stale route guard (pn-4),ATLAS-2,PN,3,To Do,2026-04-21,,Atlas GA
+ATLAS-31,Story,Re-route trigger (pn-5),ATLAS-2,PN,3,Done,2026-04-16,2026-05-14,Atlas GA
+ATLAS-32,Story,Re-route trigger (pn-6),ATLAS-2,PN,5,To Do,2026-07-24,,Atlas GA
+ATLAS-33,Story,Traffic feed ingest (pn-7),ATLAS-2,PN,2,Done,2026-07-09,2026-08-17,Atlas GA
+ATLAS-34,Story,Fallback path (pn-8),ATLAS-2,PN,3,Done,2026-07-23,2026-08-26,Atlas GA
+ATLAS-35,Story,Stale route guard (pn-9),ATLAS-2,PN,3,To Do,2026-05-27,,Atlas GA
+ATLAS-36,Story,Traffic feed ingest (pn-10),ATLAS-2,PN,5,To Do,2026-05-04,,Atlas GA
+ATLAS-37,Story,Stale route guard (pn-11),ATLAS-2,PN,3,Done,2026-06-17,2026-07-15,Atlas GA
+ATLAS-38,Story,Diff push (pn-12),ATLAS-2,PN,3,In Progress,2026-05-03,,Atlas GA
+ATLAS-39,Story,Api docs (rv-1),ATLAS-3,RV,5,Done,2026-06-25,2026-08-19,Atlas GA
+ATLAS-40,Story,Sdk stubs (rv-2),ATLAS-3,RV,5,To Do,2026-04-22,,Atlas GA
+ATLAS-41,Story,Auth scopes (rv-3),ATLAS-3,RV,5,To Do,2026-06-19,,Atlas GA
+ATLAS-42,Story,Rate limits (rv-4),ATLAS-3,RV,5,To Do,2026-07-03,,Atlas GA
+ATLAS-43,Story,Auth scopes (rv-5),ATLAS-3,RV,2,Done,2026-05-08,2026-06-02,Atlas GA
+ATLAS-44,Story,Auth scopes (rv-6),ATLAS-3,RV,2,Done,2026-07-05,2026-07-16,Atlas GA
+ATLAS-45,Story,Api docs (rv-7),ATLAS-3,RV,2,In Progress,2026-07-08,,Atlas GA
+ATLAS-46,Story,Rate limits (rv-8),ATLAS-3,RV,2,To Do,2026-05-12,,Atlas GA
+ATLAS-47,Story,Api docs (pn-1),ATLAS-3,PN,3,Done,2026-05-06,2026-06-17,Atlas GA
+ATLAS-48,Story,Api docs (pn-2),ATLAS-3,PN,5,Done,2026-05-21,2026-06-28,Atlas GA
+ATLAS-49,Story,Rate limits (pn-3),ATLAS-3,PN,8,Done,2026-05-13,2026-07-08,Atlas GA
+ATLAS-50,Story,Api docs (pn-4),ATLAS-3,PN,3,Done,2026-05-05,2026-06-04,Atlas GA
+ATLAS-51,Story,Settings page (ad-1),ATLAS-4,AD,5,Done,2026-05-19,2026-06-18,Atlas GA
+ATLAS-52,Story,Route editor (ad-2),ATLAS-4,AD,3,Done,2026-07-19,2026-09-07,Atlas GA
+ATLAS-53,Story,Eta badges (ad-3),ATLAS-4,AD,5,Done,2026-07-04,2026-08-30,Atlas GA
+ATLAS-54,Story,Map layer (ad-4),ATLAS-4,AD,5,To Do,2026-04-12,,Atlas GA
+ATLAS-55,Story,Settings page (ad-5),ATLAS-4,AD,2,Done,2026-05-13,2026-06-14,Atlas GA
+ATLAS-56,Story,Settings page (ad-6),ATLAS-4,AD,5,To Do,2026-07-13,,Atlas GA
+ATLAS-57,Story,Map layer (ad-7),ATLAS-4,AD,5,Done,2026-05-11,2026-06-28,Atlas GA
+ATLAS-58,Story,Settings page (ad-8),ATLAS-4,AD,3,Done,2026-07-25,2026-09-17,Atlas GA
+ATLAS-59,Story,Settings page (ad-9),ATLAS-4,AD,3,Done,2026-06-15,2026-06-28,Atlas GA
+ATLAS-60,Story,Settings page (ad-10),ATLAS-4,AD,3,Done,2026-04-16,2026-06-11,Atlas GA
+ATLAS-61,Story,Drag-to-reorder (ad-11),ATLAS-4,AD,3,Done,2026-05-28,2026-07-16,Atlas GA
+ATLAS-62,Story,Map layer (ad-12),ATLAS-4,AD,5,Done,2026-05-03,2026-05-21,Atlas GA
+ATLAS-63,Story,Memory leak fix (sk-1),ATLAS-5,SK,5,To Do,2026-06-24,,Atlas GA
+ATLAS-64,Story,Canary deploy (sk-2),ATLAS-5,SK,8,To Do,2026-08-01,,Atlas GA
+ATLAS-65,Story,P95 latency budget (sk-3),ATLAS-5,SK,3,To Do,2026-05-27,,Atlas GA
+ATLAS-66,Story,Alert tuning (sk-4),ATLAS-5,SK,2,To Do,2026-07-20,,Atlas GA
+ATLAS-67,Story,Alert tuning (pn-1),ATLAS-5,PN,5,To Do,2026-07-18,,Atlas GA
+ATLAS-68,Story,Canary deploy (pn-2),ATLAS-5,PN,3,In Progress,2026-06-08,,Atlas GA
+ATLAS-69,Story,Memory leak fix (pn-3),ATLAS-5,PN,3,Done,2026-04-16,2026-06-08,Atlas GA
+ATLAS-70,Story,Chaos drill (pn-4),ATLAS-5,PN,8,In Progress,2026-07-06,,Atlas GA
+ATLAS-71,Story,P95 latency budget (pn-5),ATLAS-5,PN,3,Done,2026-07-21,2026-08-31,Atlas GA
+ATLAS-72,Story,Chaos drill (pn-6),ATLAS-5,PN,3,In Progress,2026-07-07,,Atlas GA
