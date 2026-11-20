@@ -124,6 +124,49 @@ class View:
                 a, b = max(0, i - 90), min(len(line), i + 150)
                 line = ("..." if a else "") + line[a:b].strip() + ("..." if b < len(line) else "")
             return f"{label}: {line[:260]}"
+        if table == "jira":
+            r = db.execute("select j.*, e.full_name from jira_issues j join employees e using(emp_id) where key=?", (key,)).fetchone()
+            if not r:
+                raise KeyError(ref)
+            done = f", resolved {r['resolved']}" if r["resolved"] else ""
+            return (f"{r['key']} \"{r['summary']}\" [{r['epic_name']}] {r['full_name']}, {r['story_points']} pts, "
+                    f"{r['status']}, created {r['created']}{done}")
+        if table == "versions":
+            r = db.execute("select * from jira_versions where version=?", (key,)).fetchone()
+            if not r:
+                raise KeyError(ref)
+            return (f"Jira version '{r['version']}': release date {r['release_date']} (originally "
+                    f"{r['original_release_date']}), last changed {r['last_changed']} by {r['changed_by']}")
+        if table == "incidents":
+            r = db.execute("select * from incidents where id=?", (key,)).fetchone()
+            if not r:
+                raise KeyError(ref)
+            return (f"{r['id']} {r['severity']} {r['service']} opened {r['opened_utc']} (UTC), "
+                    f"{r['duration_min']} min, responder '{r['responder_as_written']}'")
+        if table == "oncall":
+            r = db.execute("select * from oncall where week_of=?", (key,)).fetchone()
+            if not r:
+                raise KeyError(ref)
+            return f"on-call week of {r['week_of']}: primary {r['primary_as_written']}, secondary {r['secondary_as_written']}"
+        if table == "invoices":
+            r = db.execute("select * from invoices where inv_no=?", (key,)).fetchone()
+            if not r:
+                raise KeyError(ref)
+            return (f"invoice {r['inv_no']} {r['vendor']} dated {r['invoice_date']} for {r['period']}: "
+                    f"{inr(r['total_inr'])} incl. GST")
+        if table == "commits":  # aggregate over one person (both git identities for Priya)
+            r = db.execute("select count(*) n, min(effective_date) a, max(effective_date) b, "
+                           "sum(ist_hour>=22 or ist_hour<2) late, count(distinct author_email) ids "
+                           "from commits where emp_id=?", (key,)).fetchone()
+            if not r["n"]:
+                raise KeyError(ref)
+            return (f"git: {key} {r['n']} commits {r['a']}..{r['b']} under {r['ids']} author email(s); "
+                    f"{round(100 * r['late'] / r['n'])}% between 22:00 and 02:00 IST")
+        if table == "org":
+            r = db.execute("select * from org_history where emp_id=? and status=?", tuple(key.split(":"))).fetchone()
+            if not r:
+                raise KeyError(ref)
+            return f"org_history {r['emp_id']} -> {r['manager_id']} ({r['status']}; from {r['from_date']})"
         raise KeyError(ref)
 
     def ref_source(self, ref):
@@ -136,6 +179,10 @@ class View:
                 "documents": ("documents", "doc_id"), "transcripts": ("transcripts", "t_id")}
         if table == "pulse":
             return "SRC-PULSE"
+        fixed = {"jira": "SRC-JIRA", "versions": "SRC-JIRA", "incidents": "SRC-PD", "oncall": "SRC-ROTA",
+                 "commits": "SRC-GIT", "invoices": "SRC-INV-PIS114", "org": "SRC-T6b"}
+        if table in fixed:
+            return fixed[table]
         t, idc = qmap[table]
         r = db.execute(f"select source_id from {t} where {idc}=?", (key,)).fetchone()
         if not r:

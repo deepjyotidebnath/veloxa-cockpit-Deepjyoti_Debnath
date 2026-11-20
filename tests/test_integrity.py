@@ -17,7 +17,8 @@ class Integrity(unittest.TestCase):
         return [tuple(r) for r in self.db.execute(sql, a)]
 
     def test_row_counts(self):
-        for t, n in [("employees", 19), ("gl", 28), ("payroll", 56), ("reqs", 6), ("pulse", 24), ("leave", 19)]:
+        for t, n in [("employees", 19), ("gl", 28), ("payroll", 56), ("reqs", 6), ("pulse", 24), ("leave", 19),
+                     ("jira_issues", 62), ("incidents", 11), ("oncall", 17), ("commits", 1453)]:
             self.assertEqual(self.q(f"select count(*) from {t}")[0][0], n, t)
 
     def test_referential(self):
@@ -68,6 +69,24 @@ class Integrity(unittest.TestCase):
                 self.assertLessEqual(self.db.execute("select released_on from sources where source_id=?",
                                                      (v.ref_source(ref),)).fetchone()[0], D1)
 
+    def test_day3_cross_checks(self):
+        """Claims made in TRANSCRIPT_NOTES.md N-25..N-30."""
+        self.assertEqual(self.q("select count(*) from incidents where severity='SEV1' and effective_date like '2026-08%'")[0][0], 3)
+        # Priya's two git identities never overlap in time by more than one commit and share one repo
+        self.assertEqual(self.q("select count(distinct repo) from commits where emp_id='VX007'")[0][0], 1)
+        # Sneha is on the rota every week; the contractor appears only from 17 Aug
+        self.assertEqual(self.q("select count(*) from oncall where primary_emp_id='VX012' or secondary_emp_id='VX012'")[0][0], 17)
+        self.assertEqual(self.q("select min(week_of) from oncall where primary_kind='contractor' or secondary_kind='contractor'")[0][0], "2026-08-17")
+        # Jira: PN holds 62 of 115 open points; nothing resolved after 17 Sep
+        self.assertEqual(self.q("select sum(story_points) from jira_issues where status!='Done'")[0][0], 115)
+        self.assertEqual(self.q("select sum(story_points) from jira_issues where status!='Done' and emp_id='VX007'")[0][0], 62)
+        self.assertEqual(self.q("select max(resolved) from jira_issues")[0][0], "2026-09-17")
+        # ledger vs invoice: PIS-108 booked as 60,000 + 18% GST
+        self.assertEqual(self.q("select amount_inr from gl where voucher='JV-0902'")[0][0], 70800)
+        # board Q3 'feature-complete' vs Jira re-routing epic
+        self.assertEqual(self.q("select sum(story_points), sum(case when status='Done' then story_points else 0 end) "
+                                "from jira_issues where epic='ATLAS-2'")[0], (42, 13))
+
     def test_nothing_known_before_release(self):
         b = worry.brief(known_by="2026-11-15")
         self.assertEqual(b["total_items"], 0)          # never padded
@@ -83,8 +102,11 @@ class Integrity(unittest.TestCase):
 
     def test_brief_default_is_top_three_and_ordered(self):
         b = worry.brief(today="2026-11-17")
-        self.assertEqual([i["id"] for i in b["top"]], ["atlas_ga", "eng_capacity", "runway_round"])
+        self.assertEqual([i["id"] for i in b["top"]], ["atlas_ga", "key_person", "eng_capacity"])
         self.assertEqual(b["age_days"], 17)
+        # what the brief said on Day 2 must still be reproducible by date (no rewriting history)
+        b2 = worry.brief(known_by=D2, today="2026-11-17")
+        self.assertEqual([i["id"] for i in b2["top"]], ["atlas_ga", "eng_capacity", "runway_round"])
         scores = [i["score"] for i in b["top"]]
         self.assertEqual(scores, sorted(scores, reverse=True))
         self.assertTrue(all(i["evidence"] for i in b["top"]))

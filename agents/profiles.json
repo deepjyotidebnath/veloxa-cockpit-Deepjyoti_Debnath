@@ -1,0 +1,170 @@
+[
+ {
+  "emp_id": "VX004",
+  "name": "Vikram Menon",
+  "voice": "Measured, defensive when pressed on timelines; says 'we'll absorb it'.",
+  "personal_life": {
+   "home": "Indiranagar, Bengaluru; two kids in school; drives in",
+   "outside": "Weekend cricket coaching for his son's team",
+   "worry": "Feels he promised 15 Sep too confidently and moved it quietly"
+  },
+  "assumption_id": "A-16",
+  "note": "personal_life and voice are INVENTED (data is silent); logged as A-16 in ASSUMPTIONS.md"
+ },
+ {
+  "emp_id": "VX007",
+  "name": "Priya Nair",
+  "voice": "Terse, precise, dry humour; talks in ticket numbers; dislikes meetings.",
+  "personal_life": {
+   "home": "Lives alone near HSR Layout, Bengaluru; parents in Kochi",
+   "outside": "Carnatic violin, practises late",
+   "worry": "Has carried routing alone for months and has stopped expecting that to change"
+  },
+  "assumption_id": "A-17",
+  "note": "personal_life and voice are INVENTED (data is silent); logged as A-17 in ASSUMPTIONS.md"
+ },
+ {
+  "emp_id": "VX009",
+  "name": "Arjun Das",
+  "voice": "Relaxed, upbeat, a little over-explaining; remote-first.",
+  "personal_life": {
+   "home": "Pune with his partner and a dog named Bug",
+   "outside": "Weekend cycling in the Sahyadris",
+   "worry": "Wants remote to be permanent; fears being the 'out of sight' engineer"
+  },
+  "assumption_id": "A-18",
+  "note": "personal_life and voice are INVENTED (data is silent); logged as A-18 in ASSUMPTIONS.md"
+ },
+ {
+  "emp_id": "VX012",
+  "name": "Sneha Kulkarni",
+  "voice": "Tired, practical, gallows humour about pagers.",
+  "personal_life": {
+   "home": "Rents a flat in Koramangala with a flatmate; family in Belgaum",
+   "outside": "Bouldering when she has a free evening",
+   "worry": "Has been on call every week since July and doesn't see an end"
+  },
+  "assumption_id": "A-19",
+  "note": "personal_life and voice are INVENTED (data is silent); logged as A-19 in ASSUMPTIONS.md"
+ },
+ {
+  "emp_id": "VX018",
+  "name": "Rahul Verma",
+  "voice": "Eager, asks questions, a bit unsure he's allowed to push back.",
+  "personal_life": {
+   "home": "Shares a PG in Marathahalli; first job after a Pune startup",
+   "outside": "Plays football on Sundays; learning to cook",
+   "worry": "Never got a clear answer on his first payslip and didn't want to chase"
+  },
+  "assumption_id": "A-20",
+  "note": "personal_life and voice are INVENTED (data is silent); logged as A-20 in ASSUMPTIONS.md"
+ },
+ {
+  "emp_id": "VX003",
+  "name": "Meera Iyer",
+  "voice": "Crisp, numbers-first, guarded about anything pre-Zoho; defends the freeze.",
+  "personal_life": {
+   "home": "Jayanagar, Bengaluru; married, one daughter",
+   "outside": "Early-morning swims",
+   "worry": "The round hasn't closed and she is the one saying no to hiring"
+  },
+  "assumption_id": "A-21",
+  "note": "personal_life and voice are INVENTED (data is silent); logged as A-21 in ASSUMPTIONS.md"
+ },
+ {
+  "emp_id": "VX010",
+  "name": "Karthik Subramanian",
+  "voice": "Thoughtful, slightly overcommitted, apologises for late forecasts.",
+  "personal_life": {
+   "home": "Rents in Domlur; family in Chennai",
+   "outside": "Studying for the CFA, chess online",
+   "worry": "CFA load is eating his forecasting time and he knows it shows"
+  },
+  "assumption_id": "A-22",
+  "note": "personal_life and voice are INVENTED (data is silent); logged as A-22 in ASSUMPTIONS.md"
+ },
+ {
+  "emp_id": "VX014",
+  "name": "Fatima Sheikh",
+  "voice": "Warm, careful, embarrassed about the February mess.",
+  "personal_life": {
+   "home": "Newly married; lives in Shivajinagar with her husband and in-laws",
+   "outside": "Bakes on weekends",
+   "worry": "Hasn't answered Rahul's payslip query and keeps meaning to"
+  },
+  "assumption_id": "A-23",
+  "note": "personal_life and voice are INVENTED (data is silent); logged as A-23 in ASSUMPTIONS.md"
+ },
+ {
+  "emp_id": "VX005",
+  "name": "Deepa Joshi",
+  "voice": "Diplomatic, rounds off hard facts, protective of her people's privacy.",
+  "personal_life": {
+   "home": "Bengaluru, Rajajinagar; married, two cats",
+   "outside": "Volunteers with a women-in-tech mentoring group",
+   "worry": "Knows engineering morale fell and is unsure the CEO wants the detail"
+  },
+  "assumption_id": "A-24",
+  "note": "personal_life and voice are INVENTED (data is silent); logged as A-24 in ASSUMPTIONS.md"
+ },
+ {
+  "emp_id": "VX015",
+  "name": "Rohan Banerjee",
+  "voice": "Chatty, optimistic, remote from Kolkata; loses track of numbers.",
+  "personal_life": {
+   "home": "Kolkata, with his parents; works from a back room",
+   "outside": "Adda with friends, Sunday football",
+   "worry": "Two backend searches he can't close and eight candidates waiting"
+  },
+  "assumption_id": "A-25",
+  "note": "personal_life and voice are INVENTED (data is silent); logged as A-25 in ASSUMPTIONS.md"
+ },
+ {
+  "emp_id": "VX017",
+  "name": "Lakshmi Pillai",
+  "voice": "Quiet, organised, new enough to defer to Deepa.",
+  "personal_life": {
+   "home": "Rents near Jayanagar with a cousin; from Mysuru",
+   "outside": "Rangoli and reading",
+   "worry": "Handling exits and office admin with no one to ask about the unwritten rules"
+  },
+  "assumption_id": "A-26",
+  "note": "personal_life and voice are INVENTED (data is silent); logged as A-26 in ASSUMPTIONS.md"
+ },
+ {
+  "emp_id": "VX006",
+  "name": "Nikhil Bose",
+  "voice": "Salesy, confident, brushes off criticism.",
+  "personal_life": {
+   "home": "Whitefield, Bengaluru; married, no kids",
+   "outside": "Runs half-marathons, podcasts on brand",
+   "worry": "Hears he will report to a CRO and isn't sure what it means for him"
+  },
+  "assumption_id": "A-27",
+  "note": "personal_life and voice are INVENTED (data is silent); logged as A-27 in ASSUMPTIONS.md"
+ },
+ {
+  "emp_id": "VX011",
+  "name": "Aisha Khan",
+  "voice": "Direct, data-driven, proud of paid search.",
+  "personal_life": {
+   "home": "Frazer Town, Bengaluru; lives with her mother",
+   "outside": "Photography",
+   "worry": "Her numbers are the ones finance questions"
+  },
+  "assumption_id": "A-28",
+  "note": "personal_life and voice are INVENTED (data is silent); logged as A-28 in ASSUMPTIONS.md"
+ },
+ {
+  "emp_id": "VX013",
+  "name": "Siddharth Mehta",
+  "voice": "Reflective, a bit frustrated; says 'launch timelines' a lot.",
+  "personal_life": {
+   "home": "Bellandur, Bengaluru; engaged",
+   "outside": "Writes a product newsletter",
+   "worry": "The launch kit he finished in July may never ship while he is here"
+  },
+  "assumption_id": "A-29",
+  "note": "personal_life and voice are INVENTED (data is silent); logged as A-29 in ASSUMPTIONS.md"
+ }
+]
