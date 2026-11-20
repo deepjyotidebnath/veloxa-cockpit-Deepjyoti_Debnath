@@ -7,6 +7,7 @@ of every document. **The owner is responsible for all of it** and must be able t
 | When | Task |
 |---|---|
 | 16 Nov | Read the Day 1 pack from Drive (brief, T1, T2, master, GL, payroll, boards, 3 emails, templates); list conflicts |
+| 20 Nov | Read the Day 3 and Day 4 material from Drive (Jira, git log, PagerDuty, rota, launch kit, invoice, T4/T5/T6b-d); extend loader, answers, worry list; build 14 agents, simulation, 19 new QA cases and 17 tests; draft T6b-T6d responses and all log additions |
 | 17 Nov | Read the Day 2 pack (T3, T6a, leave, hiring, pulse, resignation, 4 emails); build loader, cockpit, worry view, 41 tests; draft T6a response and all logs |
 
 ## Where the AI was wrong, and what changed
@@ -32,3 +33,21 @@ of every document. **The owner is responsible for all of it** and must be able t
   AI must not decide which source is true for you: read each, then tick or overrule.
 - **Impact/urgency scores** in `worry.py` are the AI's judgement calls (D-06).
 - **No GitHub push** was possible from this environment; the repo link and the Mon-night email are for you to do.
+
+## Added 20 Nov
+**More errors by the AI, and what changed**
+8. **Lateness, stated plainly.** Day 3 and Day 4 work, and the T6b/T6c/T6d responses, were not done on their release days. They are committed on 20 Nov; the commit dates are true, not backdated.
+9. **Backspace bug.** A regex `\b` inside a non-raw Python string became a backspace character, so "who reports to the CRO?" silently failed. Found by running my own sample questions, fixed, and a QA case (U11) now covers it.
+10. **Wrong router order.** "When will Atlas ship?" hit the generic forecast rule ("will") and said "I don't know" even though Jira has a date. Added an Atlas-specific rule before it.
+11. **A test that proved the wrong thing.** U03 ("When is Atlas going to launch?") expected "unknown" with all data loaded; true only on Day 2. I pinned it to Day 2 knowledge and added the full-data version (Q31) rather than loosening the assertion.
+12. **Retroactive brief change (caught before shipping).** Adding Day 3 evidence to old items would have lowered the 17 Nov brief's scores. Fixed with `evidence_later` and a test that the 17 Nov ranking is reproducible.
+13. **Context loss.** Partway through, my working context was reset and I rediscovered earlier work (the repo, an unfinished `agents.py`) from the filesystem and git history rather than from memory. I re-ran the tests before building on it.
+14. **Planned-row priority.** `include_planned=True` returned the recorded manager because ordering put it first; test caught it.
+
+**Verified against the originals this time.** The earlier CSVs were built from Drive's text rendering. I downloaded the original xlsx files and checked them row by row (`tests/test_raw_fidelity.py`). They match.
+
+**Limits the owner should verify**
+- Every invented personal life (A-16..A-29) is mine; read them and keep, change or cut.
+- `TRANSCRIPT_NOTES.md` N-25..N-38 conclusions are proposals; the rules say you decide which source is true.
+- The refusal of T6c (D-14) is my judgement; you may disagree.
+- No push to GitHub was possible (the token in this environment is invalid): you must create the public repo, push, and send the two emails yourself.

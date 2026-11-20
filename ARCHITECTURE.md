@@ -49,12 +49,26 @@ know". Refusals: individual pay, survey comments, predictions about named people
 `worry.py` ranks evidence-backed items by impact x urgency x confidence x visible-evidence share. Evidence not yet
 released is dropped and lowers confidence rather than leaking.
 
-## Not built yet
+## Day 3/4 additions
 
-- 14 agent colleagues (roster is fixed by the data: 5 Engineering, 3 Finance, 3 People & Ops, 3 Marketing). Plan:
-  each agent's memory is an append-only list of dated records filtered through the same `View`, so an agent cannot
-  "remember" something its source had not released.
-- Day 3/4 data; stretch simulation after 31 Oct.
+- **Engineering tables** (`jira_issues`, `jira_versions`, `incidents`, `oncall`, `commits`, `invoices`) with explicit entity
+  resolution at load time: Jira initials, Priya's two git identities, Sneha (employee) vs Snehal (contractor).
+- **`eng.py`** derives work-concentration facts (share of open points and commits, on-call weeks, incident counts). It measures
+  work; it predicts nothing about anyone.
+- **`org.py` + `org_history`** make reporting lines effective-dated; 'planned' rows (T6b) exist but are inert until a dated record appears.
+- **Agents (`agents.py`)**: memory = dated records read through `View`, so release dates bind them too; personality is
+  invented, labelled in every reply and logged (A-16..A-29). Pay, survey comments and speculation about colleagues are refused.
+- **Simulation (`sim.py`)** writes to `build/sim.db`, a separate file; the evidence database cannot contain synthetic rows.
+- **Worry list**: `evidence_later` lets new evidence strengthen an item without retroactively weakening earlier briefs.
+
+## Source trust, with worked examples (D-04, D-18)
+Exports > dated documents/emails > board prose > machine transcripts. Jira beat Vikram's call on the GA date (N-28) and the board's
+"feature-complete" (N-29); the ledger and invoice beat an email's "starts this week" (N-30).
+
+## Not built
+- No LLM in the loop (D-03): fluent paraphrase of questions and richer agent dialogue would need one, constrained to retrieve and phrase, never to supply facts.
+- No Slack/CRM data exist, so nothing is built on them.
 
 ## Changelog
 - 17 Nov: first version. Day 1 + Day 2 loaded; cockpit, worry view, 30 QA cases + 11 integrity tests.
+- 20 Nov: Day 3/4 loaded; engineering tables, org history, agents, simulation; 49 QA cases; point-in-time brief reproducible per date.
